@@ -1,0 +1,21 @@
+#include "../get_next_line.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/types.h>
+
+
+int		main()
+{
+	int	fd;
+	char *line;
+	int ret;
+
+	fd = 0;
+	ret = 1;
+	while (ret == get_next_line(fd, &line))
+	{
+		printf("fd %d ret  %d  %s\n", fd, ret, line);
+	}
+	return (0);
+}
