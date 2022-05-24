@@ -6,7 +6,7 @@
 /*   By: ostrizh <strizh.olga.fi@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 06:07:02 by ostrizh           #+#    #+#             */
-/*   Updated: 2022/05/23 13:29:16 by ostrizh          ###   ########.fr       */
+/*   Updated: 2022/05/24 17:49:51 by ostrizh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ int	handle_result(size_t ret, char **fd_buffer, char **line)
 	if (ret < 0 || ret > BUFF_SIZE)
 		return (-1);
 	else if ((ret == 0) && (!*fd_buffer))
+	{
+		*line = NULL;
 		return (0);
+	}
 	else
 		return (get_line(fd_buffer, line));
 }
@@ -90,7 +93,7 @@ int	get_next_line(const int fd, char **line)
 {
 	static char		*lines_buffer[MAX_FD];
 
-	if (BUFF_SIZE < 1 || fd < 0 || fd > MAX_FD || !line)
+	if (BUFF_SIZE < 1 || fd < 0 || fd >= MAX_FD || !line)
 		return (-1);
 	return (handle_buffer(fd, &(lines_buffer[fd]), line));
 }
